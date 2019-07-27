@@ -6,9 +6,13 @@ Snap is a popular card game in which players deal cards and react quickly to spo
 Build a simple command line app that simulates two players play each other. For example, the app will output:
 
 Bob turns card 'KS'
+
 John turns card 'AH'
+
 Bob turns card '2D'
+
 John turns card '2C'
+
 SNAP! John is the winner!!
 
 The player with the quickest reactions to say SNAP, wins the game.
