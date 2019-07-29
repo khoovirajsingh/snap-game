@@ -1,3 +1,5 @@
-class Player(name: String, thinkTime: Int) {
+import deck.Card
 
+class Player(name: String, thinkTime: Int) {
+    var card: Card? = null
 }

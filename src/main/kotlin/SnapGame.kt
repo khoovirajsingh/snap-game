@@ -14,6 +14,7 @@ class SnapGame(val deck: Deck, val console: SnapGameConsole) {
 
     fun play() {
         validatePlayers()
+        playerOne?.card = deck.nextCard()
     }
 
     private fun validatePlayers() {
