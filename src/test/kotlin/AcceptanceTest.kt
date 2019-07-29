@@ -12,7 +12,7 @@ class AcceptanceTest {
     @Test
     fun `snap game displays winning message if last two cards match`() {
         val console: SnapGameConsole = spyk()
-        val deck = setupDeck()
+        val deck = createStubbedDeck()
         val game = createSnapGame(deck, console)
 
         game.play()
@@ -26,7 +26,7 @@ class AcceptanceTest {
         }
     }
 
-    private fun setupDeck(): Deck {
+    private fun createStubbedDeck(): Deck {
         val deck: Deck = mockk()
         every { deck.nextCard() } returns
                 Card(KING, SPADE) andThen

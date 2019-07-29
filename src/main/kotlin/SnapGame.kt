@@ -1,16 +1,26 @@
 import deck.Deck
 
-class SnapGame(deck: Deck, console: SnapGameConsole) {
+class SnapGame(val deck: Deck, val console: SnapGameConsole) {
+    var playerOne: Player? = null
+    var playerTwo: Player? = null
+
     fun addPlayerOne(player: Player) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        playerOne = player
     }
 
     fun addPlayerTwo(player: Player) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        playerTwo = player
     }
 
     fun play() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        validatePlayers()
+    }
+
+    private fun validatePlayers() {
+        if (playerOne == null || playerTwo == null) {
+            console.print("We need two players to start the game")
+            return
+        }
     }
 
 }
