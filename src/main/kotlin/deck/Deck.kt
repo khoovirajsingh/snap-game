@@ -1,13 +1,14 @@
 package deck
 
-import deck.Ranks.*
-import deck.Suits.*
-
 class Deck {
-    private val cards = mutableSetOf<Card>()
+    private val cards = mutableListOf<Card>()
+
+    init {
+        addCardsToDeck()
+    }
 
     fun nextCard(): Card {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return cards.removeAt(0)
     }
 
     fun hasCards(): Boolean {
@@ -15,6 +16,12 @@ class Deck {
     }
 
     fun shuffle() {
-        cards.add(Card(ACE, HEART))
+        cards.shuffle()
+    }
+
+    private fun addCardsToDeck() {
+        enumValues<Suits>().forEach {
+                suit -> enumValues<Ranks>().forEach {
+                rank -> cards.add(Card(rank, suit)) } }
     }
 }
