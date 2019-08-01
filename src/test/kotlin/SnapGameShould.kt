@@ -1,18 +1,18 @@
 import deck.Card
-import deck.Deck
-import deck.Ranks.*
-import deck.Suits.*
-import io.mockk.every
-import io.mockk.mockk
+import deck.Ranks.TWO
+import deck.StubbedDeck
+import deck.Suits.HEART
+import deck.Suits.SPADE
 import io.mockk.spyk
 import io.mockk.verify
-import org.amshove.kluent.shouldEqual
+import org.amshove.kluent.`should be`
+import org.amshove.kluent.`should equal`
 import org.junit.Before
 import org.junit.Test
 
 class SnapGameShould {
     private val console: SnapGameConsole = spyk()
-    private val deck: Deck = mockk()
+    lateinit var deck: StubbedDeck
     lateinit var game: SnapGame
 
     private val playerOne = Player("Player One", thinkTime = 1000)
@@ -20,9 +20,9 @@ class SnapGameShould {
 
     @Before
     fun setUp() {
+        deck = createStubbedDeck()
         game = SnapGame(deck, console)
         addPlayers()
-        createStubbedDeck()
     }
 
     @Test
@@ -33,22 +33,22 @@ class SnapGameShould {
     }
 
     @Test
-    fun `play if we have two players`() {
+    fun `shuffle deck before playing the game`() {
         game.play()
-        verify (exactly = 0) { console.print(any()) }
+        deck.hasBeenShuffled `should be` true
     }
 
     @Test
     fun `set Player One with the next card that is drawn from the deck`() {
         game.play()
-        playerOne.card shouldEqual Card(TWO, HEART)
+        playerOne.card `should equal` Card(TWO, HEART)
     }
 
     @Test
     fun `set Player One and Player Two with the next cards that are drawn from the deck`() {
         game.play()
-        playerOne.card shouldEqual Card(TWO, HEART)
-        playerTwo.card shouldEqual Card(TWO, SPADE)
+        playerOne.card `should equal` Card(TWO, HEART)
+        playerTwo.card `should equal` Card(TWO, SPADE)
     }
 
     @Test
@@ -62,10 +62,11 @@ class SnapGameShould {
         game.addPlayerTwo(playerTwo)
     }
 
-    private fun createStubbedDeck() {
-        every { deck.nextCard() } returns
-                Card(TWO, HEART) andThen
-                Card(TWO, SPADE)
+    private fun createStubbedDeck(): StubbedDeck {
+        val deck = StubbedDeck()
+        deck.addCard(Card(TWO, HEART))
+        deck.addCard(Card(TWO, SPADE))
+        return deck
     }
 
     private fun addEmptyPlayers() {

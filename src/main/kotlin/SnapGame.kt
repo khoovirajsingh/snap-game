@@ -14,16 +14,35 @@ class SnapGame(private val deck: Deck, private val console: SnapGameConsole) {
 
     fun play() {
         validatePlayers()
-        playerOne.card = deck.nextCard()
-        playerTwo.card = deck.nextCard()
-        if (playerOne.hasWonAgainst(playerTwo)) {
-            console.print("SNAP! ${playerOne.name} is the winner!!")
+        deck.shuffle()
+        while (deck.hasCards()) {
+            turnCardForPlayers()
+            checkForWinner()
         }
+    }
+
+    private fun turnCardForPlayers() {
+        turnCardFor(playerOne)
+        turnCardFor(playerTwo)
+    }
+
+    private fun checkForWinner() {
+        if (playerOne.hasWonAgainst(playerTwo)) {
+            console.print(playerOne.won())
+        }
+        if (playerTwo.hasWonAgainst(playerOne)) {
+            console.print(playerTwo.won())
+        }
+    }
+
+    private fun turnCardFor(player: Player) {
+        player.card = deck.nextCard()
+        console.print(player.turn())
     }
 
     private fun validatePlayers() {
         if (playerOne.name.isEmpty() || playerTwo.name.isEmpty()) {
-            console.print("We need two players to start the game")
+            console.print(playerOne.missing())
             return
         }
     }

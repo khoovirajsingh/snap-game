@@ -8,13 +8,13 @@ class DeckShould {
 
     @Test
     fun `contain cards`() {
-        val  deck = Deck()
+        val  deck = SnapGameDeck()
         deck.hasCards() `should be` true
     }
 
         @Test
     fun `contain 52 unique cards`() {
-        val deck = Deck()
+        val deck = SnapGameDeck()
         val previousCard = deck.nextCard()
         var numberOfCards = 1
 

@@ -1,9 +1,8 @@
 import deck.Card
 import deck.Deck
-import deck.Suits.*
 import deck.Ranks.*
-import io.mockk.every
-import io.mockk.mockk
+import deck.StubbedDeck
+import deck.Suits.*
 import io.mockk.spyk
 import io.mockk.verifySequence
 import org.junit.Test
@@ -27,12 +26,11 @@ class AcceptanceTest {
     }
 
     private fun createStubbedDeck(): Deck {
-        val deck: Deck = mockk()
-        every { deck.nextCard() } returns
-                Card(KING, SPADE) andThen
-                Card(ACE, HEART) andThen
-                Card(TWO, DIAMOND) andThen
-                Card(TWO, CLUB)
+        val deck = StubbedDeck()
+        deck.addCard(Card(KING, SPADE))
+        deck.addCard(Card(ACE, HEART))
+        deck.addCard(Card(TWO, DIAMOND))
+        deck.addCard(Card(TWO, CLUB))
         return deck
     }
 

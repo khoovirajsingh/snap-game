@@ -1,6 +1,8 @@
 import deck.Card
 import deck.Ranks
+import deck.Ranks.*
 import deck.Suits
+import deck.Suits.*
 import org.amshove.kluent.`should be`
 import org.junit.jupiter.api.Test
 
@@ -19,23 +21,23 @@ class PlayerShould {
 
     @Test
     fun `win if card matches and has faster think time`() {
-        val player = createPlayer("Bob", 1000)
-        val anotherPlayer = createPlayer("Joe", 2000)
+        val player = createPlayer("Bob", 1000, Card(TWO, HEART))
+        val anotherPlayer = createPlayer("Joe", 2000, Card(TWO, SPADE))
 
         player.hasWonAgainst(anotherPlayer) `should be` true
     }
 
     @Test
     fun `lose if card matches and has slower think time`() {
-        val player = createPlayer("Bob", 2000)
-        val anotherPlayer = createPlayer("Joe", 1000)
+        val player = createPlayer("Bob", 2000, Card(TWO, HEART))
+        val anotherPlayer = createPlayer("Joe", 1000, Card(THREE, SPADE))
 
         player.hasWonAgainst(anotherPlayer) `should be` false
     }
 
-    private fun createPlayer(name: String, thinkTime: Int): Player {
+    private fun createPlayer(name: String, thinkTime: Int, card: Card): Player {
         val player = Player(name, thinkTime)
-        player.card = Card(Ranks.TWO, Suits.HEART)
+        player.card = card
         return player
     }
 }
