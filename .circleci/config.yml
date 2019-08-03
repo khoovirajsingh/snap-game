@@ -2,7 +2,9 @@
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
-version: 2
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.5
 jobs:
   build:
     docker:
@@ -40,3 +42,10 @@ jobs:
 
       # run tests!
       - run: gradle test
+
+      - run: gradle jacocoTestReport
+
+      - run: gradle sonarqube -Dsonar.projectKey=khoovirajsingh_snap-game -Dsonar.organization=khoovirajsingh -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONARQUBE_TOKEN
+
+      - codecov/upload:
+              file: build/reports/jacoco/test/jacocoTestReport.xml
