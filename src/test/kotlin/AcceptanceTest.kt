@@ -5,7 +5,7 @@ import deck.StubbedDeck
 import deck.Suits.*
 import io.mockk.spyk
 import io.mockk.verifySequence
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class AcceptanceTest {
     @Test

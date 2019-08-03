@@ -1,8 +1,8 @@
 import deck.Card
-import deck.Ranks
-import deck.Ranks.*
-import deck.Suits
-import deck.Suits.*
+import deck.Ranks.THREE
+import deck.Ranks.TWO
+import deck.Suits.HEART
+import deck.Suits.SPADE
 import org.amshove.kluent.`should be`
 import org.junit.jupiter.api.Test
 
