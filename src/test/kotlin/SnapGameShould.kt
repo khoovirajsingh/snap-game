@@ -7,8 +7,9 @@ import io.mockk.spyk
 import io.mockk.verify
 import org.amshove.kluent.`should be`
 import org.amshove.kluent.`should equal`
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.BeforeEach
+
 
 class SnapGameShould {
     private val console: SnapGameConsole = spyk()
@@ -18,7 +19,7 @@ class SnapGameShould {
     private val playerOne = Player("Player One", thinkTime = 1000)
     private val playerTwo = Player("Player Two", thinkTime = 2000)
 
-    @Before
+    @BeforeEach
     fun setUp() {
         deck = createStubbedDeck()
         game = SnapGame(deck, console)
